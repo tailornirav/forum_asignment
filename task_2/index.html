@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <title>Monthly Interest Rate Calculator</title>
+  </head>
+  <body>
+    <form">
+      <div>
+        <h2>Monthly Interest Rate Calculator</h2>
+        <div>
+          <label>Loan amount</label>
+          <input name="K" type="number" min="1" placeholder="Amount" />
+        </div>
+        <div>
+          <label>Credit Period</label>
+          <input name="n" type="number" min="1" placeholder="Months"/>
+        </div>
+        <div>
+          <label>Annual Rate</label>
+          <input name="pr" type="number" min="1" placeholder="Percentage"/>
+        </div>
+        <div>
+          <label>Monthly Rate</label>
+          <input name="rate" type="number" disabled placeholder="Amount"/>
+        </div>
+        <div>
+          <label>Repaid amount</label>
+          <input name="repaid" type="number" disabled placeholder="Amount"/>
+        </div>
+      </div>
+      <div>
+        <button type="submit" onclick="return calculate()">Calculate</button>
+      </div>
+    </form>
+    <script>
+      function calculate() {
+        var K = document.querySelector('input[name="K"]').value;
+        var n = document.querySelector('input[name="n"]').value;
+        var pr = document.querySelector('input[name="pr"]').value;
+        var rate = document.querySelector('input[name="rate"]');
+        var repaid = document.querySelector('input[name="repaid"]');
+  
+        var pr_mc = pr/1200;
+        var monthly_rate = (K * pr_mc) / (1 - (1 / Math.pow(1 + pr_mc, n)));
+        var repaid_amount = monthly_rate * n;
+  
+        rate.value = monthly_rate.toFixed(2);
+        repaid.value = repaid_amount.toFixed(2);
+
+        return true;
+      }
+    </script>
+  </body>
+</html>
